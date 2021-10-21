@@ -1,6 +1,9 @@
 import React from 'react'
 import './homepage.styles.scss'
 
+import Directory from '../../Components/Directory/Directory'
+import { MenuItem } from '../../Components'
+
 const Homepage=()=>{
     return(
         
