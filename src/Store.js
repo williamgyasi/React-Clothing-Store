@@ -22,6 +22,7 @@ export const HOME_SECTIONS = [
       imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
       size: 'large',
       id: 4,
+      size:'large',
       linkUrl: 'shop/womens'
     },
     {
@@ -29,6 +30,7 @@ export const HOME_SECTIONS = [
       imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
       size: 'large',
       id: 5,
+      size:'large',
       linkUrl: 'shop/mens'
     }
   ];
