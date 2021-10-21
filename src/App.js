@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import Homepage  from './newpage.component';
+import Homepage  from './Pages/Homepage/Homepage';
 function App() {
   return (
     <div className="App">
