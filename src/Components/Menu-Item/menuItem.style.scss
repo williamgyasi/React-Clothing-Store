@@ -7,19 +7,38 @@
     justify-content: center;
     border: 1px solid black;
     margin: 0 7.5px 15px;
-    background-position: center;
-    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    
+    cursor: pointer;
 
     &.large{
         height: 380px;
-        
     }
+
 
     &:first-child{
         margin-right: 7.5px;
     }
     &:last-child{
         margin-left: 7.5px;
+    }
+
+    
+
+
+}
+
+.background-image{
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 6s cubic-bezier(0.25,0.45,0.45,0.95);
+    position: absolute;
+    &:hover{
+        transform: scale(1.1);
+
     }
 }
 
@@ -31,6 +50,8 @@
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    background-color: #fff;
+    opacity: 0.8;
 
     &-title{
         font-weight: bold;
@@ -43,4 +64,7 @@
         font-size: 16px;
     }
 
+}
+.menu-item:hover .content{
+    background-color: #fff;
 }
