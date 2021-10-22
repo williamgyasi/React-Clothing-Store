@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import './login.styles.scss'
 
+import { FormInput } from '../index'
+
 const Login=()=>{
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
@@ -37,26 +39,28 @@ const Login=()=>{
     }
 
     return(
-        <div onSubmit={handleSubmit}>
+        <div className="login" onSubmit={handleSubmit}>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
             <form action="">
-                <input 
+                <FormInput 
                 name="email" 
                 type="email" 
                 value={user[email]}
                 onChange={handleUserAccountChange}
+                label="Email"
                  required />
-                <label>Email</label>
+            
 
-                <input 
+                <FormInput 
                 name="password" 
                 type="password" 
                 value={user[password]} 
                 required
                 onChange={handleUserAccountChange} 
+                label="Password"
                 />
-                <label>Password</label>
+                
 
                 <input type="submit" value="Submit Form"/>
             </form>

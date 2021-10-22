@@ -4,3 +4,4 @@ export {default as CollectionPreview} from './CollectionPreview/CollectionPrevie
 export {default as CollectionItem} from './CollectionItem/CollectionItem'
 export {default as Header} from './Header/Header'
 export {default as Login} from './Login/Login'
+export {default as FormInput} from './FormInput/FormInput'
