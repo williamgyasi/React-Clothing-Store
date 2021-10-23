@@ -63,11 +63,11 @@ const Login = () => {
           <Button type="submit" value="Submit Form">
             Login
           </Button>
-          <Button onClick={signInWithGoogle} type="submit" value="Submit Form">
+          <Button isGoogleSignIn onClick={signInWithGoogle} type="submit" value="Submit Form">
             Sign in with Google
           </Button>
         </div>
-        
+
       </form>
     </div>
   );
