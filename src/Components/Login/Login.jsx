@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './login.styles.scss'
 
-import { FormInput } from '../index'
+import { FormInput,Button } from '../index'
 
 const Login=()=>{
     const [email,setEmail]=useState("")
@@ -62,7 +62,9 @@ const Login=()=>{
                 />
                 
 
-                <input type="submit" value="Submit Form"/>
+                <Button type="submit" value="Submit Form">
+                    Login
+                </Button>
             </form>
         </div>
     )
