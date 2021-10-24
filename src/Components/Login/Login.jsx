@@ -3,7 +3,7 @@ import "./login.styles.scss";
 
 import { FormInput, Button } from "../index";
 
-import { signInWithGoogle,addUserToDatabase } from "../../Firebase/firebase.utils";
+import { signInWithGoogle,addUserToDatabase,signInUser } from "../../Firebase/firebase.utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,10 +37,8 @@ const Login = () => {
   };
 
 
-  const handleSignIn=()=>{
-      const loggedUser = signInWithGoogle();
-      console.log("!!!!")
-      console.log(loggedUser)
+  const handleSignIn=async()=>{
+      await signInUser(email,password)
   }
 
   return (
@@ -51,8 +49,8 @@ const Login = () => {
         <FormInput
           name="email"
           type="email"
-          value={user[email]}
-          onChange={handleUserAccountChange}
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
           label="Email"
           required
         />
@@ -60,14 +58,17 @@ const Login = () => {
         <FormInput
           name="password"
           type="password"
-          value={user[password]}
+          value={password}
           required
-          onChange={handleUserAccountChange}
+          onChange={(e)=>setPassword(e.target.value)}
           label="Password"
         />
 
-        <div className="button-container">
-          <Button type="submit" value="Submit Form">
+        <div
+         className="button-container">
+          <Button 
+          onClick={handleSignIn}
+          type="submit" value="Submit Form">
             Login
           </Button>
           <Button isGoogleSignIn onClick={signInWithGoogle} type="submit" value="Submit Form">

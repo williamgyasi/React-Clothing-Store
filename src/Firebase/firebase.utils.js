@@ -4,8 +4,9 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithEmailAndPassword
 } from "firebase/auth";
-import { getFirestore,doc,getDoc,setDoc,collection } from "firebase/firestore";
+import { getFirestore,doc,getDoc,setDoc,collection,addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOeYRqlVxEBQ6caOTL9752fz-yIqxFVIU",
@@ -20,21 +21,56 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
+
 export const firestore = getFirestore();
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
-const userRef=collection(firestore,"Users")
+const userCollectionRef=collection(firestore,"Users")
 
 
 
 //FIREBASE FUNCTIONS
+
+
+export const signInUser=async(email,password)=>{
+    try {
+        const loggedIn=await signInWithEmailAndPassword(auth,email,password)
+        console.log(loggedIn)
+
+    } catch (error) {
+        console.log("ISSUE SIGNING IN USER",error.message)
+    }
+}
+export const createUser=async(email,password,displayName)=>{
+    try {
+        const logged=await createUserWithEmailAndPassword(auth,email,password)
+        const createdAt=new Date()
+
+        const user={
+            firstname:displayName,
+            email:logged.user.email,
+            leg:"legolas",
+            createdAt
+        }
+        addUserToDatabase(logged.user.uid,user)
+    } catch (error) {
+        console.log("Issue with creating user",error.message)
+    }
+  
+}
+
 const addUserToDatabase=async(UID,user)=>{
     try {
         if(!UID) return;
-        const docRef=await setDoc(doc(userRef,UID),user)
-        console.log("AH AH AH ",docRef.id)
+        const docRef=doc(userCollectionRef,UID)
+        const toDatabase={
+            id:docRef.id,
+            ...user
+        }
+        await setDoc(docRef,toDatabase)
+        console.log(docRef.id)
     } 
     catch (error) {
         console.log("There was an error",error.message)
