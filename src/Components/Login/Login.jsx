@@ -36,6 +36,12 @@ const Login = () => {
     console.log(event.target.name);
   };
 
+
+  const  handleSignIn=()=>{
+    signInWithGoogle()
+    
+  }
+
   return (
     <div className="login" onSubmit={handleSubmit}>
       <h2>I already have an account</h2>
@@ -63,7 +69,7 @@ const Login = () => {
           <Button type="submit" value="Submit Form">
             Login
           </Button>
-          <Button isGoogleSignIn onClick={signInWithGoogle} type="submit" value="Submit Form">
+          <Button isGoogleSignIn onClick={handleSignIn} type="submit" value="Submit Form">
             Sign in with Google
           </Button>
         </div>
