@@ -1,11 +1,12 @@
 import React from 'react'
 import './loginregister.styles.scss'
-import { Login } from '../../Components'
+import { Login,Register } from '../../Components'
 
 const LoginAndRegister=()=>{
     return(
         <div className="loginRegister">
             <Login />
+            <Register />
         </div>
     )
 }
