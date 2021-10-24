@@ -8,6 +8,8 @@ import LoginAndRegister from "./Pages/LoginAndRegister/LoginAndRegister";
 import { Header } from "./Components";
 
 import { auth } from "./Firebase/firebase.utils";
+import { signInWithGoogle } from "./Firebase/firebase.utils";
+
 
 function App() {
   const [user,setUser]=useState(null)
@@ -16,6 +18,7 @@ function App() {
     var unsubscribe=auth.onAuthStateChanged(user=>setUser(user))
 
     // console.log(user)
+    
 
     return ()=>{
       unsubscribe()

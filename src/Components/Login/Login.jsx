@@ -3,7 +3,7 @@ import "./login.styles.scss";
 
 import { FormInput, Button } from "../index";
 
-import { signInWithGoogle } from "../../Firebase/firebase.utils";
+import { signInWithGoogle,addUserToDatabase } from "../../Firebase/firebase.utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,9 +37,10 @@ const Login = () => {
   };
 
 
-  const  handleSignIn=()=>{
-    signInWithGoogle()
-    
+  const handleSignIn=()=>{
+      const loggedUser = signInWithGoogle();
+      console.log("!!!!")
+      console.log(loggedUser)
   }
 
   return (
@@ -69,7 +70,7 @@ const Login = () => {
           <Button type="submit" value="Submit Form">
             Login
           </Button>
-          <Button isGoogleSignIn onClick={handleSignIn} type="submit" value="Submit Form">
+          <Button isGoogleSignIn onClick={signInWithGoogle} type="submit" value="Submit Form">
             Sign in with Google
           </Button>
         </div>
