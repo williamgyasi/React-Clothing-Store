@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './header.style.scss'
 import {ReactComponent as Logo} from '../../Assets/shop-svgrepo-com.svg'
-import { auth } from '../../Firebase/firebase.utils'
+import { logOutUser } from '../../Firebase/firebase.utils'
 
 import { connect } from 'react-redux'
 
@@ -23,7 +23,7 @@ const Header=({currentUser})=>{
                 {
                     currentUser?
                     (
-                       <div className="option" onClick={()=>auth.signOut()}>Sign Out</div>
+                       <div className="option" onClick={()=>logOutUser}>Sign Out</div>
                       
                     ):
                     (
@@ -38,7 +38,7 @@ const Header=({currentUser})=>{
 }
 
 const mapStateToProps=state=>({
-    currentUser:state.user.currentUser
+    currentUser:state.USER_REDUCER.currentUser
 })
 
 export default connect(mapStateToProps)(Header)

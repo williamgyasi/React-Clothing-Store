@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword
 } from "firebase/auth";
 import { getFirestore,doc,getDoc,setDoc,collection,onSnapshot,onSnapshotsInSync } from "firebase/firestore";
+import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOeYRqlVxEBQ6caOTL9752fz-yIqxFVIU",
@@ -33,15 +34,33 @@ const userCollectionRef=collection(firestore,"Users")
 
 //FIREBASE FUNCTIONS
 
-export const getUserSnapshot=async userRef=>{
-    let subscribe;
-     const userSnapshot= await onSnapshot(doc(userCollectionRef,userRef.id),doc=>{
-        //  console.log(doc.data())
-         return doc.data()
-    })
+export const logOutUser=async()=>{
+    try {
+        await auth.signOut();
+    } catch (error) {
+        console.log("Error logging out user",error.message)
+    }
+}
 
-    console.log(userSnapshot)
+export const getUserData=async userRef=>{
+    // const [userData,setUserData]=useState(null)
+    try {
+        const docSnap=await getDoc(userRef)
+        return {
+            id:docSnap.id,
+            ...docSnap.data()}
+    } catch (error) {
+        console.log("Error Retrieving User",error.message)
+    }
 
+}
+
+export const getUserSnapshot =async(userRef)=>{
+    try {
+        return onSnapshot(doc(userCollectionRef,userRef.id))
+    } catch (error) {
+        console.log("Error Getting Snapshot",error.message)
+    }
 }
 
 export const signInUser=async(email,password)=>{
