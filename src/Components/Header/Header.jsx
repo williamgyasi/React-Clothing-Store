@@ -6,6 +6,8 @@ import { logOutUser } from '../../Firebase/firebase.utils'
 
 import { connect } from 'react-redux'
 
+import { CartIcon,CartDropdown } from '../index'
+
 const Header=({currentUser})=>{
     return(
         <div className="header">
@@ -30,9 +32,11 @@ const Header=({currentUser})=>{
                         <Link className="option" to="/signin">Login</Link>
                     )
                 }
+                <CartIcon />
                 
                 
             </div>
+            <CartDropdown />
         </div>
     )
 }

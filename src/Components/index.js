@@ -7,4 +7,9 @@ export {default as Login} from './Login/Login'
 export {default as Register} from './Register/Register'
 export {default as FormInput} from './FormInput/FormInput'
 export {default as Button} from './Button/Button'
+export {default as CartIcon} from './CartIcon/CartIcon'
+export {default as CartDropdown} from './CartDropdown/CartDropdown'
+
+
+
 
