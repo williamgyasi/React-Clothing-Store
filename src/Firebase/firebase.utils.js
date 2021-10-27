@@ -6,7 +6,7 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { getFirestore,doc,getDoc,setDoc,collection,addDoc } from "firebase/firestore";
+import { getFirestore,doc,getDoc,setDoc,collection,onSnapshot,onSnapshotsInSync } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOeYRqlVxEBQ6caOTL9752fz-yIqxFVIU",
@@ -33,6 +33,16 @@ const userCollectionRef=collection(firestore,"Users")
 
 //FIREBASE FUNCTIONS
 
+export const getUserSnapshot=async userRef=>{
+    let subscribe;
+     const userSnapshot= await onSnapshot(doc(userCollectionRef,userRef.id),doc=>{
+        //  console.log(doc.data())
+         return doc.data()
+    })
+
+    console.log(userSnapshot)
+
+}
 
 export const signInUser=async(email,password)=>{
     try {
@@ -43,6 +53,7 @@ export const signInUser=async(email,password)=>{
         console.log("ISSUE SIGNING IN USER",error.message)
     }
 }
+
 export const createUser=async(email,password,displayName)=>{
     try {
         const logged=await createUserWithEmailAndPassword(auth,email,password)
@@ -54,30 +65,36 @@ export const createUser=async(email,password,displayName)=>{
             leg:"legolas",
             createdAt
         }
-        addUserToDatabase(logged.user.uid,user)
+        // addUserToDatabase(logged.user.uid,user)
     } catch (error) {
         console.log("Issue with creating user",error.message)
     }
   
 }
 
-const addUserToDatabase=async(UID,user)=>{
-    try {
-        if(!UID) return;
-        const docRef=doc(userCollectionRef,UID)
-        const toDatabase={
-            id:docRef.id,
-            ...user
+export const createUserProfileDocument=async (userAuth,additonalData)=>{
+    if(!userAuth) return;
+    
+    const userRef=doc(userCollectionRef,userAuth.uid)
+
+        const {displayName,email}=userAuth;
+        const createdAt=new Date();
+        try {
+            await setDoc(userRef,{
+                displayName,
+                email,
+                createdAt,
+                ...additonalData
+            })
+        } catch (error) {
+            console.log('Error creating user',error.message)
         }
-        await setDoc(docRef,toDatabase)
-        console.log(docRef.id)
-    } 
-    catch (error) {
-        console.log("There was an error",error.message)
-    }
+    
+    return userRef;
+
 }
 
-
+ 
 export const signInWithGoogle = () => {
   try {
     signInWithPopup(auth, provider).then((results) => {
@@ -90,7 +107,7 @@ export const signInWithGoogle = () => {
             leg:"Leg",
             createdAt
         }
-        addUserToDatabase(UID,user)
+        // addUserToDatabase(UID,user)
     });
   } catch (error) {
       const errorCode =error.code ;

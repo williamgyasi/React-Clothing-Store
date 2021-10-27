@@ -6,25 +6,41 @@ import Homepage from "./Pages/Homepage/Homepage";
 import Shop from "./Pages/Shop/Shop";
 import LoginAndRegister from "./Pages/LoginAndRegister/LoginAndRegister";
 import { Header } from "./Components";
-
+import { connect } from "react-redux";
 import { auth } from "./Firebase/firebase.utils";
-import { signInWithGoogle } from "./Firebase/firebase.utils";
+import { createUserProfileDocument,getUserSnapshot } from "./Firebase/firebase.utils";
+import {onSnapshot,onSnapshotsInSync } from "firebase/firestore";
+
+
+import { SET_CURRENT_USER } from "./Redux/User/userActions";
 
 
 function App() {
-  const [user,setUser]=useState(null)
+  const [currentUser,setCurrentUser]=useState(null)
 
   useEffect(()=>{
-    var unsubscribe=auth.onAuthStateChanged(user=>setUser(user))
     
+    var unsubscribe=auth.onAuthStateChanged(async googleUserObject=>{
+      if(googleUserObject) {
+        const userRef = await createUserProfileDocument(googleUserObject);
+        const userSnapshot= await getUserSnapshot(userRef)
+        
+        // console.log("USER RED",await userSnapshot)
+
+      }
+    
+    })
+
     return ()=>{
       unsubscribe()
+      // userSnapshot()
     }
-  },[user])
+  },[currentUser])
 
   return (
     <div className="App">
-      <Header currentUser={user} />
+      <Header />
+      {/* <div className="">{currentUser.displayName}</div> */}
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
@@ -35,4 +51,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps=dispatch=>({
+  SET_CURRENT_USER:user=>dispatch(SET_CURRENT_USER(user))
+})
+
+export default connect(null,mapDispatchToProps) (App);
