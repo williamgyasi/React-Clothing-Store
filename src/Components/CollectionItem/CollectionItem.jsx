@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import { Button } from '../../Components/index'
 
 const CollectionItem=({id,name,price,imageUrl})=>{
     return(
@@ -13,6 +14,7 @@ const CollectionItem=({id,name,price,imageUrl})=>{
                     <span className="name">{name}</span>
                     <span className="price">{price}</span>
                 </div>
+                <Button className="button">Add To Cart</Button>
         </div>
     )
 }

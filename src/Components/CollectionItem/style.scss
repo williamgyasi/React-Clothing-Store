@@ -5,9 +5,12 @@
     height: 350px;
     align-items: center;
     cursor: pointer;
+    position: relative;
+    
 
     &:hover{
       // background-color: red;
+      opacity: .8;
     }
     &:not(:last-child){
       margin-right: 30px;
@@ -39,5 +42,14 @@
       .price {
         width: 10%;
       }
+    }
+
+    .button{
+      position: absolute;
+      top: 70%;
+      visibility: hidden;
+    }
+    &:hover .button{
+      visibility: visible;
     }
   }
