@@ -1,6 +1,6 @@
 import {CART_TYPES} from './cartTypes'
 const INITIAL_STATE={
-    toggleValue:true
+    hidden:true
 }
 
 
@@ -9,7 +9,7 @@ const cartReducer =(state=INITIAL_STATE,action)=>{
         case CART_TYPES.TOGGLE_CART_HIDDEN:
             return{
                 ...state,
-                toggleValue:!state.toggleValue,
+                hidden:!state.hidden,
             }
 
         default: {

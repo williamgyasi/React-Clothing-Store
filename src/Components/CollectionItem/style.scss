@@ -4,8 +4,11 @@
     flex-direction: column;
     height: 350px;
     align-items: center;
-    
     cursor: pointer;
+
+    &:hover{
+      // background-color: red;
+    }
     &:not(:last-child){
       margin-right: 30px;
     }
