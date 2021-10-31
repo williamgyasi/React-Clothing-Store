@@ -9,6 +9,10 @@ export {default as FormInput} from './FormInput/FormInput'
 export {default as Button} from './Button/Button'
 export {default as CartIcon} from './CartIcon/CartIcon'
 export {default as CartDropdown} from './CartDropdown/CartDropdown'
+export {default as CartItem} from './CartItem/CartItem'
+
+
+
 
 
 
