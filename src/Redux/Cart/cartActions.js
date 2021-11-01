@@ -11,3 +11,17 @@ export const ADD_TO_CART=(item)=>{
         payload:item
     }
 }
+
+export const REMOVE_FROM_CART=(item)=>{
+    return{
+        type:CART_TYPES.REMOVE_FROM_CART,
+        payload:item
+    }
+}
+
+export const DECREASE_ITEM_COUNT=(item)=>{
+    return{
+        type:CART_TYPES.DECREASE_ITEM_COUNT,
+        payload:item
+    }
+}
