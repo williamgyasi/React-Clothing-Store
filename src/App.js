@@ -6,6 +6,7 @@ import Homepage from "./Pages/Homepage/Homepage";
 import Shop from "./Pages/Shop/Shop";
 import LoginAndRegister from "./Pages/LoginAndRegister/LoginAndRegister";
 import { Header } from "./Components";
+import Checkout from "./Pages/Checkout/Checkout";
 import { connect } from "react-redux";
 import { auth } from "./Firebase/firebase.utils";
 import { createUserProfileDocument,getUserData,getUserSnapshot } from "./Firebase/firebase.utils";
@@ -47,7 +48,9 @@ function App({SET_CURRENT_USER,currentUser}) {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={Shop} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/signin" render={()=>currentUser? (<Redirect to='/' />):(<LoginAndRegister />)} />
+
       </Switch>
       {/* <Homepage /> */}
     </div>
