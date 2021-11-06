@@ -1,12 +1,13 @@
 import React,{useState} from "react";
 import {HOME_SECTIONS} from "../../Store"
 
+import { connect } from "react-redux";
 import { MenuItem } from "../index";
 
 import './directory.style.scss'
 
 
-const Directory=()=>{
+const Directory=({sections})=>{
         return(
         <div className="directory-menu">
             {
@@ -20,4 +21,8 @@ const Directory=()=>{
     )
 }
 
-export default Directory;
+const mapStateToProps=({CART_REDUCER:sections})=>({
+    section:sections
+})
+
+export default connect()(Directory);
