@@ -9,11 +9,11 @@ import CollectionsOverview from '../../Components/CollectionsOverview/Collection
 import Collection from '../Collection/Collection'
 
 const Shop =({match})=>{
-    // console.log(match.path)
+    
     return(
         <div className="shop-page">
             <Route exact path={`${match.path}`} component={CollectionsOverview} />
-            <Route path={`${match.path}/:categoryId`} component={Collection} />
+            <Route path={`${match.path}/:categoryID`} component={Collection} />
         </div>
     )
 }
