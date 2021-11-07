@@ -33,7 +33,7 @@ const INITIAL_STATE={
         
           linkUrl: 'shop/mens'
         }
-      ];
+      ],
     
 }
 

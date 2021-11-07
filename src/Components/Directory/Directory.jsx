@@ -3,7 +3,9 @@ import {HOME_SECTIONS} from "../../Store"
 
 import { connect } from "react-redux";
 import { MenuItem } from "../index";
+import { createStructuredSelector } from "reselect";
 
+import { selectSections } from "../../Redux/Directory/directorySelector";
 import './directory.style.scss'
 
 
@@ -11,7 +13,7 @@ const Directory=({sections})=>{
         return(
         <div className="directory-menu">
             {
-                HOME_SECTIONS.map(({id,...sectionProps})=>(
+                sections.map(({id,...sectionProps})=>(
                     <MenuItem
                      key={id} 
                      {...sectionProps} />
@@ -21,8 +23,8 @@ const Directory=({sections})=>{
     )
 }
 
-const mapStateToProps=({CART_REDUCER:sections})=>({
-    section:sections
+const mapStateToProps=createStructuredSelector({
+    sections:selectSections
 })
 
-export default connect()(Directory);
+export default connect(mapStateToProps)(Directory);
