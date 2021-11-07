@@ -11,6 +11,7 @@ export {default as CartIcon} from './CartIcon/CartIcon'
 export {default as CartDropdown} from './CartDropdown/CartDropdown'
 export {default as CartItem} from './CartItem/CartItem'
 export {default as CheckoutItem} from './CheckoutItem/CheckoutItem'
+export {default as CollectionOverivew} from './CollectionsOverview/CollectionsOverview'
 
 
 
