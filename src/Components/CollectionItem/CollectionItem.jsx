@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { ADD_TO_CART } from '../../Redux/Cart/cartActions'
 
-const CollectionItem=({id,name,price,imageUrl,item,add_to_cart})=>{
+const CollectionItem=({item,add_to_cart})=>{
     
     return(
         <div 
@@ -13,12 +13,12 @@ const CollectionItem=({id,name,price,imageUrl,item,add_to_cart})=>{
          className="collection-item">
             <div 
             style={{
-                backgroundImage:`url(${imageUrl})`
+                backgroundImage:`url(${item.imageUrl})`
             }}
             className="image" />
                 <div className="collection-footer">
-                    <span className="name">{name}</span>
-                    <span className="price">{price}</span>
+                    <span className="name">{item.name}</span>
+                    <span className="price">{item.price}</span>
                 </div>
                 <Button
                   onClick={()=>add_to_cart(item)}

@@ -7,6 +7,7 @@ const COLLECTION_ID_MAP={
     womens:4,
     mens:5
 }
+
 const selectShop=state=>state.SHOP_REDUCER;
 
 export const selectShopData=createSelector(
@@ -14,8 +15,13 @@ export const selectShopData=createSelector(
     (shopData)=>shopData.shopData
 )
 
+export const selectCollectionForPreview=createSelector(
+    [selectShopData],
+    collections=>Object.keys(collections).map(key=>collections[key])
+)
+
 export const selectCollection=collectionUrlParam=>
 createSelector(
     [selectShopData],
-    collections=>collections.find(collection=>collection.id===COLLECTION_ID_MAP[collectionUrlParam])
+    collections=>collections[collectionUrlParam]
 )
