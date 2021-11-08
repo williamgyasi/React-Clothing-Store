@@ -1,25 +1,59 @@
 import React from "react";
-import {Elements,useStripe,useElements,CardElement} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import ReactDOM from "react-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  CardElement,
+  Elements,
+  useStripe,
+  useElements,
+  PaymentElement
+} from "@stripe/react-stripe-js";
 
+const CheckoutForm = () => {
+  const stripe = useStripe();
+  const elements = useElements();
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-function Stripe({price}) {
-    const stripe=useStripe()
-    const stripePromise = loadStripe('pk_test_51HA00YJqgrv92NC6ELLXCvNZD0SKdIrGHgSfV9nIuPdkrWGHv7USybZJUr13FnEGjPx5Hkc7QGObImEGw0C3LwqX00BYYekTyF');
-    const priceForStripe=price*100
-    
-  
-    return (
-        <form onSubmit={handleSubmit}>
-          <CardElement />
-          <button type="submit" disabled={!stripe || !elements}>
-            Pay
-          </button>
-        </form>
-      );
+    if (elements == null) {
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
   };
 
+  return (
+    <form 
+    style={{
+        width:"100%",
+        // backgroundColor:"#0000B9",
+        flexDirection:"column",
+        display:"flex",
+        justifyContent:"center",
+        // alignItems:"center"
+    }}
+    onSubmit={handleSubmit}>
+        <div>
+        <CardElement  />
+        </div>
+     
+      <button type="submit" disabled={!stripe || !elements}>
+        Pay
+      </button>
+    </form>
+  );
+};
 
+const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
-export default Stripe;
+const StripeCheckout = () => (
+  <Elements stripe={stripePromise}>
+    <CheckoutForm />
+  </Elements>
+);
+
+export default StripeCheckout;
