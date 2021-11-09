@@ -1,4 +1,4 @@
-import firebase, { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,9 +6,17 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { getFirestore,doc,getDoc,setDoc,collection,onSnapshot,onSnapshotsInSync } from "firebase/firestore";
-import { useState } from "react";
-
+import { 
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    collection,
+    onSnapshot,
+    writeBatch,
+    query,
+    getDocs
+ } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyCOeYRqlVxEBQ6caOTL9752fz-yIqxFVIU",
   authDomain: "clothing-store-a2dc9.firebaseapp.com",
@@ -29,10 +37,44 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 const userCollectionRef=collection(firestore,"Users")
+const collectionRef=collection(firestore,"collections")
 
 
 
-//FIREBASE FUNCTIONS
+//FIREBASE HELPER FUNCTIONS
+export const pullCollectionInstance=async()=>{
+    const queries=query(collectionRef)
+    const querySnapshot=await getDocs(queries);
+    return convertCollectionSnapshotMap(querySnapshot)
+}
+export const convertCollectionSnapshotMap=(collection)=>{
+    const transformedCollection=collection.docs.map((doc)=>{
+        const {routeName,title,items}=doc.data()
+
+        return{
+            id:doc.id,
+            routeName:routeName,
+            title,
+            items           
+        }
+    })
+    return transformedCollection.reduce((accumalator,collection)=>{
+        accumalator[collection.title.toLowerCase()]=accumalator
+        return accumalator;
+    },{})
+    
+}
+export const addCollectionAndDocuments=async (collectionKey,ObjectToAdd)=>{
+    const collectionRef=collection(firestore,collectionKey)
+    const batch=writeBatch(firestore)
+    ObjectToAdd.forEach((item)=>{
+        const newDocRef=doc(collectionRef,item.title)
+        batch.set(newDocRef,item)
+        // console.log(newDocRef)
+    })
+    return await batch.commit()  
+}
+
 
 export const logOutUser=async()=>{
     try {
@@ -117,7 +159,7 @@ export const createUserProfileDocument=async (userAuth,additonalData)=>{
 export const signInWithGoogle = () => {
   try {
     signInWithPopup(auth, provider).then((results) => {
-        const UID=results.user.uid;
+        // const UID=results.user.uid;
         const createdAt=new Date()
 
         const user={
@@ -129,7 +171,7 @@ export const signInWithGoogle = () => {
         // addUserToDatabase(UID,user)
     });
   } catch (error) {
-      const errorCode =error.code ;
+    //   const errorCode =error.code ;
       const errorMsg=error.message;
 
       console.log(error.message)

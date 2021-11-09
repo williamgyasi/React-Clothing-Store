@@ -2,7 +2,7 @@ import React from 'react'
 import './homepage.styles.scss'
 
 
-import { MenuItem,Directory } from '../../Components'
+import {Directory } from '../../Components'
 
 const Homepage=({history})=>{
     // console.log(history)

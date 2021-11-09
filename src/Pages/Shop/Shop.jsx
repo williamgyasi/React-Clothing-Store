@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-
-import { CollectionPreview } from '../../Components'
-import { createStructuredSelector } from 'reselect'
-import { selectShopData } from '../../Redux/Shop/shopSelector'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import CollectionsOverview from '../../Components/CollectionsOverview/CollectionsOverview'
 import Collection from '../Collection/Collection'
+import { pullCollectionInstance } from '../../Firebase/firebase.utils'
 
 const Shop =({match})=>{
-    
+    useEffect(()=>{
+        const collection = pullCollectionInstance();
+        console.log(collection)
+       
+    },[])
     return(
         <div className="shop-page">
             <Route exact path={`${match.path}`} component={CollectionsOverview} />
