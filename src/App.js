@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState,useEffect } from "react";
+import React, {useEffect } from "react";
 import { Route, Switch,Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import Homepage from "./Pages/Homepage/Homepage";
@@ -9,8 +9,7 @@ import { Header } from "./Components";
 import Checkout from "./Pages/Checkout/Checkout";
 import { connect } from "react-redux";
 import { auth } from "./Firebase/firebase.utils";
-import { createUserProfileDocument,getUserData,getUserSnapshot,addCollectionAndDocuments } from "./Firebase/firebase.utils";
-import {onSnapshot,onSnapshotsInSync, } from "firebase/firestore";
+import { createUserProfileDocument,getUserData,addCollectionAndDocuments } from "./Firebase/firebase.utils";
 import { selectCurrenUser } from "./Redux/User/selector";
 import {selectCollectionForPreview} from './Redux/Shop/shopSelector'
 

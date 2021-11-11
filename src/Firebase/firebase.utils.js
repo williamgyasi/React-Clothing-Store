@@ -38,15 +38,21 @@ provider.setCustomParameters({ prompt: "select_account" });
 
 const userCollectionRef=collection(firestore,"Users")
 const collectionRef=collection(firestore,"collections")
+export const collectionQueries=query(collectionRef)
 
 
 
 //FIREBASE HELPER FUNCTIONS
-export const pullCollectionInstance=async()=>{
-    const queries=query(collectionRef)
-    const querySnapshot=await getDocs(queries);
-    return convertCollectionSnapshotMap(querySnapshot)
-}
+// export const pullCollectionInstance=async()=>{
+//     const queries=query(collectionRef)
+//     const unsubscribe=onSnapshot(queries,querySnapshot=>{
+//     //    console.log(querySnapshot)
+//        queryArray.push(querySnapshot.docs)
+//     })
+
+//     return convertCollectionSnapshotMap(queryArray)
+// }
+
 export const convertCollectionSnapshotMap=(collection)=>{
     const transformedCollection=collection.docs.map((doc)=>{
         const {routeName,title,items}=doc.data()

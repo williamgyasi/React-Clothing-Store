@@ -2,12 +2,16 @@ import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import CollectionsOverview from '../../Components/CollectionsOverview/CollectionsOverview'
 import Collection from '../Collection/Collection'
-import { pullCollectionInstance } from '../../Firebase/firebase.utils'
-
-const Shop =({match})=>{
+import { pullCollectionInstance,collectionQueries,convertCollectionSnapshotMap } from '../../Firebase/firebase.utils'
+import { collection,onSnapshot } from '@firebase/firestore'
+import { connect } from 'react-redux'
+import { UPDATE_COLLECTIONS } from '../../Redux/Shop/shopActions'
+const Shop =({match,updateCollections})=>{
     useEffect(()=>{
-        const collection = pullCollectionInstance();
-        console.log(collection)
+        const subscribe=onSnapshot(collectionQueries,async(querySnapshot)=>{
+            const collectionMap=convertCollectionSnapshotMap(querySnapshot)
+            updateCollections(collectionMap)
+        })
        
     },[])
     return(
@@ -18,5 +22,9 @@ const Shop =({match})=>{
     )
 }
 
+const mapDispatchToProps=dispatch=>({
+    updateCollections:collectionMap=>dispatch(UPDATE_COLLECTIONS(collectionMap))
+})
 
-export default Shop
+
+export default connect(null,mapDispatchToProps)(Shop)
