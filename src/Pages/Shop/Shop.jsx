@@ -18,12 +18,10 @@ const Shop =({match,updateCollections})=>{
     useEffect(()=>{
         const subscribe=onSnapshot(collectionQueries,async(querySnapshot)=>{
             const collectionMap=convertCollectionSnapshotMap(querySnapshot)
-            console.log(collectionMap)
+            // console.log(querySnapshot.docs)
             updateCollections(collectionMap)
             setLoading(false)
         })
-
-       
     },[])
     return(
         <div className="shop-page">
