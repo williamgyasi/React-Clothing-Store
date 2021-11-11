@@ -23,5 +23,5 @@ export const selectCollectionForPreview=createSelector(
 export const selectCollection=collectionUrlParam=>
 createSelector(
     [selectShopData],
-    collections=>collections[collectionUrlParam]
+    collections=>(collections?collections[collectionUrlParam]:null)
 )
