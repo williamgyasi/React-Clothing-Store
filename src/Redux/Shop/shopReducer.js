@@ -3,6 +3,7 @@ import { SHOP_TYPES } from "./shopTypes";
 const INITIAL_STATE = {
   collections:null
 };
+
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOP_TYPES.UPDATE_COLLECTIONS:

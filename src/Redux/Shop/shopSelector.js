@@ -12,7 +12,7 @@ const selectShop=state=>state.SHOP_REDUCER;
 
 export const selectShopData=createSelector(
     [selectShop],
-    (shopData)=>shopData.shopData
+    (shopData)=>shopData.collections
 )
 
 export const selectCollectionForPreview=createSelector(
@@ -23,5 +23,5 @@ export const selectCollectionForPreview=createSelector(
 export const selectCollection=collectionUrlParam=>
 createSelector(
     [selectShopData],
-    collections=>(collections?collections[collectionUrlParam]:null)
+    collections=>collections[collectionUrlParam]
 )
