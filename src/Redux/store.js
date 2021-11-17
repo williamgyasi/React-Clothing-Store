@@ -14,3 +14,4 @@ if(process.env.NODE_ENV==='development'){
 const store=createStore(RootReducer,applyMiddleware(...middlewares))
 
 export default store;
+
