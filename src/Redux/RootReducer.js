@@ -5,6 +5,7 @@ import cartReducer from "./Cart/cartReducer";
 import directoryReducer from "./Directory/directoryReducer";
 import shopReducer from "./Shop/shopReducer";
 
+
 export default combineReducers({
     USER_REDUCER:userReducer,
     CART_REDUCER:cartReducer,
