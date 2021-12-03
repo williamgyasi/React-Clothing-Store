@@ -16,6 +16,14 @@ import {selectCollectionForPreview} from './Redux/Shop/shopSelector'
 
 import { SET_CURRENT_USER } from "./Redux/User/userActions";
 
+// import WithSample from "./HOCs/withSample/withSample";
+import withSample from "./HOCs/withSample/withSample";
+
+const testProps=({name})=>{
+  return <div>SOMETHING DEY MOVE MY LEG {name}</div>
+}
+
+const Sampleddd=withSample(testProps)
 
 function App({SET_CURRENT_USER,currentUser,collectionsArray}) {
  
@@ -45,7 +53,9 @@ function App({SET_CURRENT_USER,currentUser,collectionsArray}) {
 
   return (
     <div className="App">
+     
       <Header />
+      {/* <Sampleddd /> */}
       {/* <div className="">{currentUser.displayName}</div> */}
       <Switch>
         <Route exact path="/" component={Homepage} />
